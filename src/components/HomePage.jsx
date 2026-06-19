@@ -73,7 +73,7 @@ export default function HomePage() {
 
                         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
                             Pain Is Temporary. <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">Pride Is Forever.</span>
+                            <span className="text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-500">Pride Is Forever.</span>
                         </h1>
 
                         <p className="text-gray-400 text-base md:text-lg max-w-xl mb-10 leading-relaxed">
@@ -91,7 +91,7 @@ export default function HomePage() {
                     </div>
 
                     {/* Right Interactive Images */}
-                    <div className="lg:col-span-5 grid grid-cols-12 gap-4 relative w-full h-[400px] sm:h-[450px]">
+                    <div className="lg:col-span-5 grid grid-cols-12 gap-4 relative w-full h-100 sm:h-112.5">
                         <div className="col-span-7 h-full rounded-2xl overflow-hidden border border-neutral-800 relative group bg-neutral-900/40">
                             <img src="/images (2).jpeg" alt="Grind harder" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
