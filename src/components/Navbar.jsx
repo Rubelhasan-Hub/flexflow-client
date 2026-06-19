@@ -6,7 +6,7 @@ import { ArrowRightFromSquare } from '@gravity-ui/icons';
 import Link from 'next/link';
 import Image from 'next/image';
 import { authClient, useSession } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';
+
 
 const NavbarPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +14,6 @@ const NavbarPage = () => {
     const { data: session, isPending } = useSession();
     const user = session?.user;
 
-    console.log("Current User Data:", user);
 
     const menuItems = [
         { label: "Home", href: "/" },
@@ -22,14 +21,13 @@ const NavbarPage = () => {
         { label: "Community Forum", href: "/forum" },
     ];
 
-    const Router = useRouter();
 
 
     const handleLogout = async () => {
         await authClient.signOut({
             fetchOptions: {
                 onSuccess: () => {
-                    Router.push("/");
+                    window.location.reload();
                 },
             },
         });
@@ -69,17 +67,17 @@ const NavbarPage = () => {
                     <Link href="/classes" className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">All Classes</Link>
                     <Link href="/forum" className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">Community Forum</Link>
                     {user?.role === "user" && (
-                        <Link href="/dashboardUser" className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">
+                        <Link href="/dashboard/user" className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">
                             Dashboard
                         </Link>
                     )}
                     {user?.role === "admin" && (
-                        <Link href="/dashboardAdmin" className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">
+                        <Link href="/dashboard/admin" className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">
                             Dashboard
                         </Link>
                     )}
                     {user?.role === "trainer" && (
-                        <Link href="/dashboardTrainer" className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">
+                        <Link href="/dashboard/trainer" className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">
                             Dashboard
                         </Link>
                     )}
@@ -124,7 +122,7 @@ const NavbarPage = () => {
                 </div>
             </div>
 
-            {/* মোবাইল মেনু */}
+           
             {isMenuOpen && (
                 <div className="sm:hidden bg-[#0a0f1d] border-t border-neutral-900 px-4 pt-2 pb-6 flex flex-col gap-3 shadow-lg absolute w-full left-0">
                     {menuItems.map((item, index) => (
@@ -141,7 +139,7 @@ const NavbarPage = () => {
                     {user?.role === "user" && (
                         <Link
                             className="text-green-500 font-semibold text-base py-2 border-b border-neutral-900"
-                            href="/dashboardUser"
+                            href="/dashboard/user"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             Dashboard
@@ -150,7 +148,7 @@ const NavbarPage = () => {
                     {user?.role === "admin" && (
                         <Link
                             className="text-green-500 font-semibold text-base py-2 border-b border-neutral-900"
-                            href="/dashboardAdmin"
+                            href="/dashboard/admin"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             Dashboard
@@ -159,7 +157,7 @@ const NavbarPage = () => {
                     {user?.role === "trainer" && (
                         <Link
                             className="text-green-500 font-semibold text-base py-2 border-b border-neutral-900"
-                            href="/dashboardTrainer"
+                            href="/dashboard/trainer"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             Dashboard
