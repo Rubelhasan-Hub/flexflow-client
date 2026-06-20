@@ -7,9 +7,13 @@ import HeaderSection from "./HeaderSection";
 
 const ClassesPage = async ({ searchParams }) => {
     const params = await searchParams;
-
     const search = params?.search || "";
     const category = params?.category || "";
+
+
+
+    
+
 
     const classes = await getClasses(search, category);
 

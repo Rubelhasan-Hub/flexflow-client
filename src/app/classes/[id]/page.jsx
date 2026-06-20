@@ -1,8 +1,11 @@
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import { Clock, Calendar, Target, Award, Heart } from "lucide-react"; // Heart icon যোগ করেছি
-import { ArrowLeft, BarsAscendingAlignLeftArrowUp } from "@gravity-ui/icons";
+import { ArrowLeft } from "@gravity-ui/icons";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 const DetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -10,6 +13,15 @@ const DetailsPage = async ({ params }) => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     const res = await fetch(`${baseUrl}/api/all-classes/${id}`, { cache: 'no-store' });
     const data = await res.json();
+
+    const session = await auth.api.getSession({
+        headers: await headers()
+    });
+
+    const user = session?.user;
+    if (!user) {
+        redirect("/signin");
+    }
 
     return (
         <div className="min-h-screen bg-[#0a0f1d] text-white py-12 px-4 lg:px-20">
@@ -26,7 +38,7 @@ const DetailsPage = async ({ params }) => {
 
                 {/* Left Column */}
                 <div className="lg:col-span-2 space-y-8">
-                    <div className="relative w-full h-[300px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl border border-neutral-800">
+                    <div className="relative w-full h-75 md:h-125 rounded-2xl overflow-hidden shadow-2xl border border-neutral-800">
                         <Image
                             src={data.classImage}
                             alt={data.className}
@@ -75,7 +87,7 @@ const DetailsPage = async ({ params }) => {
                 <Button className="w-full bg-green-500 text-black font-bold h-12 hover:bg-green-400 mb-3">
 
                     <Link href="/classes" className="flex items-center gap-2">
-                     View All Classes <ArrowLeft size={18} />
+                        View All Classes <ArrowLeft size={18} />
                     </Link>
                 </Button>
             </div>
