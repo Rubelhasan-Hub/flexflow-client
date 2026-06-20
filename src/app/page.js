@@ -1,10 +1,16 @@
 import HomePage from "@/components/HomePage";
-import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const res = await fetch(`${baseUrl}/api/all-classes`, {
+    cache: 'no-store'
+  });
+
+  const classes = await res.json();
   return (
     <>
-      <HomePage />
+      <HomePage classes={classes} />
     </>
   );
 }

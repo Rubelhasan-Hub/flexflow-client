@@ -13,7 +13,6 @@ const NavbarPage = () => {
 
     const { data: session, isPending } = useSession();
     const user = session?.user;
-    console.log(user?.image);
 
 
     const menuItems = [

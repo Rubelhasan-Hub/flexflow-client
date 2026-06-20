@@ -3,7 +3,7 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 
 export const CreateClass = async (newClassData) => {
-    const response = await fetch(`${baseUrl}/api/add-class`, {
+    const response = await fetch(`${baseUrl}/api/all-classes`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

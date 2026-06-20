@@ -2,41 +2,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
-export default function HomePage() {
-    // Featured Classes Mock Data (Based on booking count)
-    const featuredClasses = [
-        { 
-            id: 1, 
-            name: "Ultimate Iron Mastery", 
-            trainer: "Md Abdulla Al Arafat", 
-            category: "Strength", 
-            price: "$25", 
-            duration: "55 mins", 
-            bookings: 42,
-            image: "/download (1).jpeg" 
-        },
-        { 
-            id: 2, 
-            name: "Metabolic Fire HIIT", 
-            trainer: "Sarah Jenkins", 
-            category: "Fat Burn", 
-            price: "$35", 
-            duration: "60 mins", 
-            bookings: 38,
-            image: "/images.jpeg" 
-        },
-        { 
-            id: 3, 
-            name: "Shatter Your Limits Bootcamp", 
-            trainer: "Alex Mercer", 
-            category: "Endurance", 
-            price: "$50", 
-            duration: "75 mins", 
-            bookings: 29,
-            image: "/images (1).jpeg"
-        },
-    ];
+export default function HomePage({ classes }) {
 
     // Latest Forum Posts Mock Data (3 most recent posts)
     const latestPosts = [
@@ -91,16 +59,19 @@ export default function HomePage() {
                     </div>
 
                     {/* Right Interactive Images */}
+
+
+                    
                     <div className="lg:col-span-5 grid grid-cols-12 gap-4 relative w-full h-100 sm:h-112.5">
                         <div className="col-span-7 h-full rounded-2xl overflow-hidden border border-neutral-800 relative group bg-neutral-900/40">
-                            <img src="/images (2).jpeg" alt="Grind harder" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <Image height={200} width={300} src="/images (2).jpeg" alt="Grind harder" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
                         <div className="col-span-5 flex flex-col gap-4 h-full">
                             <div className="h-1/2 rounded-2xl overflow-hidden border border-neutral-800 relative group bg-neutral-900/40">
-                                <img src="/download (1).jpeg" alt="Stay focused" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                <Image height={100} width={150} src="/download (1).jpeg" alt="Stay focused" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             </div>
                             <div className="h-1/2 rounded-2xl overflow-hidden border border-neutral-800 relative group bg-neutral-900/40">
-                                <img src="/download.jpeg" alt="Push limits" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                <Image height={100} width={150} src="/download.jpeg" alt="Push limits" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             </div>
                         </div>
                     </div>
@@ -131,23 +102,23 @@ export default function HomePage() {
                 <div className="text-center mb-16">
                     <p className="text-green-400 font-semibold text-xs uppercase tracking-widest mb-2">CHOOSE YOUR WAR</p>
                     <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Elite Training Programs</h2>
-                    <p className="text-gray-500 text-sm mt-3 max-w-md mx-auto">Success doesn't just find you. You have to go out and get it. Pick a discipline and dominate.</p>
+                    <p className="text-gray-500 text-sm mt-3 max-w-md mx-auto">Success does not just find you. You have to go out and get it. Pick a discipline and dominate.</p>
                 </div>
 
-                {/* Safe Animation Layout: কোনো 'hidden' স্টেট লেট বা মিস হবে না */}
+               
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {featuredClasses.map((item) => (
+                    {classes.map((item) => (
                         <motion.div 
-                            key={item.id}
+                            key={item._id}
                             variants={fadeInUp}
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, amount: 0.05 }} // সামান্য স্ক্রিন এ আসলেই লোড হবে
+                            viewport={{ once: true, amount: 0.05 }}
                             className="bg-[#0e1424] border border-neutral-900 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-neutral-800 hover:shadow-2xl hover:shadow-black/40 transition-all duration-300 group"
                         >
                             {/* Card Image Area */}
                             <div className="h-52 w-full overflow-hidden relative bg-neutral-900/40">
-                                <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <Image height={200} width={300} src={item.classImage} alt={item.className} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                 <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-neutral-800 text-green-400 text-xs px-2.5 py-1 rounded-md font-medium">
                                     {item.category}
                                 </div>
@@ -159,8 +130,7 @@ export default function HomePage() {
                             {/* Card Content */}
                             <div className="p-6 flex-1 flex flex-col justify-between">
                                 <div className="mb-6">
-                                    <h3 className="text-lg font-bold text-white mb-1.5 group-hover:text-green-400 transition-colors">{item.name}</h3>
-                                    <p className="text-xs text-gray-500">Led by {item.trainer}</p>
+                                    <h3 className="text-lg font-bold text-white mb-1.5 group-hover:text-green-400 transition-colors">{item.className}</h3>
                                 </div>
 
                                 <div className="pt-4 border-t border-neutral-900 flex items-center justify-between">
@@ -170,7 +140,7 @@ export default function HomePage() {
                                     </div>
                                     <div className="text-right">
                                         {/* Requirement: Details Button */}
-                                        <Link href={`/classes/${item.id}`}>
+                                        <Link href={`/classes/${item._id}`}>
                                             <button className="bg-neutral-900 hover:bg-green-500 text-gray-300 hover:text-black border border-neutral-800 hover:border-green-500 text-xs font-bold px-4 py-2 rounded-lg transition-all">
                                                 View Details
                                             </button>

@@ -1,0 +1,94 @@
+import { Button } from "@heroui/react";
+import Image from "next/image";
+import { Clock, Calendar, Target, Award, Heart } from "lucide-react"; // Heart icon যোগ করেছি
+import { ArrowLeft, BarsAscendingAlignLeftArrowUp } from "@gravity-ui/icons";
+import Link from "next/link";
+
+const DetailsPage = async ({ params }) => {
+    const { id } = await params;
+
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const res = await fetch(`${baseUrl}/api/all-classes/${id}`, { cache: 'no-store' });
+    const data = await res.json();
+
+    return (
+        <div className="min-h-screen bg-[#0a0f1d] text-white py-12 px-4 lg:px-20">
+            {/* Header Info */}
+            <div className="mb-10">
+                <div className="flex gap-2 mb-4">
+                    <span className="bg-neutral-800 px-3 py-1 rounded text-xs font-bold uppercase">{data.category}</span>
+                    <span className="bg-green-500/10 text-green-500 px-3 py-1 rounded text-xs font-bold uppercase">{data.difficulty}</span>
+                </div>
+                <h1 className="text-4xl md:text-5xl font-black">{data.className}</h1>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                {/* Left Column */}
+                <div className="lg:col-span-2 space-y-8">
+                    <div className="relative w-full h-[300px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl border border-neutral-800">
+                        <Image
+                            src={data.classImage}
+                            alt={data.className}
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                    </div>
+
+                    <div className="bg-neutral-900 border border-neutral-800 p-8 rounded-2xl">
+                        <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><Target className="text-green-500" /> About This Class</h2>
+                        <p className="text-neutral-400 leading-relaxed text-lg">{data.description}</p>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <DetailCard icon={<Clock size={20} />} title="DURATION" value={`${data.duration} min`} />
+                        <DetailCard icon={<Calendar size={20} />} title="SCHEDULE" value={data.scheduleDays?.join(', ')} />
+                        <DetailCard icon={<Award size={20} />} title="DIFFICULTY" value={data.difficulty} />
+                    </div>
+                </div>
+
+                {/* Right Column: Sticky Booking & Favorites */}
+                <div className="lg:col-span-1">
+                    <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl sticky top-24">
+                        <div className="text-4xl font-black mb-6">${data.price}<span className="text-sm text-neutral-500 font-normal"> / session</span></div>
+
+                        <Button className="w-full bg-green-500 text-black font-bold h-12 hover:bg-green-400 mb-3">
+                            Book Now — ${data.price}
+                        </Button>
+
+                        {/* Favorite Button */}
+                        <Button
+                            variant="bordered"
+                            className="w-full border-neutral-700 text-white font-bold h-12 hover:bg-neutral-800 flex items-center gap-2"
+                        >
+                            <Heart size={18} /> Add to Favorites
+                        </Button>
+
+                        <div className="mt-6 border-t border-neutral-800 pt-6">
+                            <p className="text-sm text-neutral-400 mb-2">Trainer Email</p>
+                            <p className="font-bold break-all">{data.trainerEmail}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <Button className="w-full bg-green-500 text-black font-bold h-12 hover:bg-green-400 mb-3">
+
+                    <Link href="/classes" className="flex items-center gap-2">
+                     View All Classes <ArrowLeft size={18} />
+                    </Link>
+                </Button>
+            </div>
+        </div>
+    );
+};
+
+const DetailCard = ({ icon, title, value }) => (
+    <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl">
+        <div className="text-green-500 mb-3">{icon}</div>
+        <p className="text-[10px] tracking-widest text-neutral-500 font-bold uppercase">{title}</p>
+        <p className="text-md font-bold mt-1">{value}</p>
+    </div>
+);
+
+export default DetailsPage;
