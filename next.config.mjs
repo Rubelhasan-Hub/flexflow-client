@@ -4,11 +4,15 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'example.com', // Replace with exact dynamic asset deployment target/Google context domains url storage targets
+        hostname: 'example.com',
       },
       {
         protocol: 'https',
-        hostname: 'lh3.googleusercontent.com', // Required for Google Auth Direct Avatar rendering layout profiles
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
       }
     ],
   },

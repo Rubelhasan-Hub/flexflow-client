@@ -13,6 +13,7 @@ const NavbarPage = () => {
 
     const { data: session, isPending } = useSession();
     const user = session?.user;
+    console.log(user?.image);
 
 
     const menuItems = [
@@ -88,15 +89,15 @@ const NavbarPage = () => {
                             <span className="text-gray-200 text-sm font-medium hidden md:inline-block">
                                 {user?.name || "User"}
                             </span>
-
-                            <Avatar
-                                className="border-2 border-green-500 cursor-pointer text-white font-bold"
-                                color="success"
-                                name={user?.name ? user.name.substring(0, 2).toUpperCase() : "US"}
-                                size="sm"
-                                src={user?.image || user?.avatar || ""}
-                            />
-
+                            <div className="w-7 h-7 rounded-full overflow-hidden border-2 border-green-500">
+                                <Image
+                                    height={40}
+                                    width={40}
+                                    src={user?.image}
+                                    alt={user?.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
                             <Button
                                 color="danger"
                                 variant="light"
@@ -122,7 +123,7 @@ const NavbarPage = () => {
                 </div>
             </div>
 
-           
+
             {isMenuOpen && (
                 <div className="sm:hidden bg-[#0a0f1d] border-t border-neutral-900 px-4 pt-2 pb-6 flex flex-col gap-3 shadow-lg absolute w-full left-0">
                     {menuItems.map((item, index) => (
