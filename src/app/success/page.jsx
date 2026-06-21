@@ -7,10 +7,9 @@ export default async function Success({ searchParams }) {
     const { session_id } = await searchParams;
 
     if (!session_id) {
-        throw new Error('Please provide a valid session_id (`cs_test_...`)');
+        throw new Error('Please provide a valid session_id');
     }
 
-  
     const session = await stripe.checkout.sessions.retrieve(session_id, {
         expand: ['payment_intent']
     });
@@ -19,17 +18,28 @@ export default async function Success({ searchParams }) {
         return redirect('/');
     }
 
-
     if (session.status === 'complete') {
         try {
+            const { 
+                classId, 
+                userEmail, 
+                userName, 
+                className, 
+                trainerName, 
+                scheduleDays 
+            } = session.metadata;
+
             await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/bookings`, {
                 method: 'POST',
                 cache: 'no-store', 
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    classId: session.metadata?.classId,
-                    userEmail: session.metadata?.userEmail,
-                    userName: session.metadata?.userName,
+                    classId,
+                    userEmail,
+                    userName,
+                    className,          
+                    trainerName,         
+                    scheduleDays: JSON.parse(scheduleDays),
                     transactionId: session.payment_intent?.id,
                     amount: session.amount_total / 100,
                     status: 'confirmed',
@@ -51,7 +61,7 @@ export default async function Success({ searchParams }) {
                     <h1 className="text-3xl font-bold text-white mb-4">Payment Successful!</h1>
                     
                     <p className="text-slate-400 mb-8 leading-relaxed">
-                        Thank you for your business! Your booking has been confirmed. 
+                        Thank you! Your booking for <span className="text-white font-bold">{session.metadata?.className}</span> has been confirmed. 
                         A confirmation email has been sent to
                         <span className="block text-white font-semibold mt-1">
                             {session.customer_details?.email}

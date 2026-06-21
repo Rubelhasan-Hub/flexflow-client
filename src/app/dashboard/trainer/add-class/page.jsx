@@ -69,6 +69,7 @@ const AddClassForm = () => {
                 ...formData,
                 classImage: imageUrl, 
                 trainerEmail: user?.email,
+                trainerName: user?.name,
                 status: status      
             };
 

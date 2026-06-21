@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useSession } from '@/lib/auth-client';
-import { BookOpen, Users, UserCircle } from 'lucide-react';
+import { BookOpen, Users} from 'lucide-react';
 
 export default function OverviewPage() {
     const { data: session } = useSession();

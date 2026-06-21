@@ -22,7 +22,7 @@ const UnauthorizedPage = () => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-col gap-3">
-                    <Link href="/login" className="w-full">
+                    <Link href="/signin" className="w-full">
                         <Button className="w-full bg-green-600 text-white font-bold h-12 hover:bg-green-700">
                             Go to Login
                         </Button>

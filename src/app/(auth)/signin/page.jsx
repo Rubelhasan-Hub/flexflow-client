@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { authClient } from '@/lib/auth-client'; // এই লাইনটি যোগ করুন
+import Link from 'next/link';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -91,7 +92,7 @@ const Login = () => {
                 <div style={styles.rightSection}>
                     <h2 style={styles.formTitle}>Welcome back</h2>
                     <p style={styles.signUpText}>
-                        Do not have an account? <span style={styles.linkText}>Sign up free</span>
+                        Do not have an account? <Link href="/signup"><span style={styles.linkText}>Sign up free</span></Link>
                     </p>
 
                     {/* QUICK DEMO CONTROLS */}
@@ -169,7 +170,7 @@ const Login = () => {
                         <svg style={styles.googleIcon} viewBox="0 0 24 24" width="18" height="18">
                             <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.53-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-8.17z" />
                             <path fill="#34A853" d="M12 24c3.24 0 5.97-1.08 7.96-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.08 1.16-3.13 0-5.78-2.11-6.73-4.96H1.21v3.15C3.18 21.88 7.31 24 12 24z" />
-                            <path fill="#FBBC05" d="M5.27 14.24A7.16 7.16 0 0 1 5 12c0-.79.13-1.57.38-2.31V6.54H1.21A11.94 11.94 0 0 0 0 12c0 1.92.45 3.74 1.21 5.46l4.06-3.22z" />
+                            <path fill="#34A853" d="M5.27 14.24A7.16 7.16 0 0 1 5 12c0-.79.13-1.57.38-2.31V6.54H1.21A11.94 11.94 0 0 0 0 12c0 1.92.45 3.74 1.21 5.46l4.06-3.22z" />
                             <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.18 2.12 1.21 5.46l4.06 3.22c.95-2.85 3.6-4.93 6.73-4.93z" />
                         </svg>
                         Continue with Google
@@ -193,7 +194,7 @@ const styles = {
         padding: '20px'
     },
     card: {
-        display: 'flex',
+        display: 'md:flex',
         width: '100%',
         maxWidth: '960px',
         backgroundColor: '#121826',
@@ -219,7 +220,7 @@ const styles = {
         fontSize: '22px'
     },
     brandTitle: {
-        color: '#ccff00',
+        color: '#34A853',
         fontSize: '22px',
         fontWeight: 'bold',
         margin: 0
@@ -266,7 +267,7 @@ const styles = {
         marginBottom: '24px'
     },
     linkText: {
-        color: '#ccff00',
+        color: '#34A853',
         cursor: 'pointer',
         fontWeight: '600'
     },
@@ -346,14 +347,14 @@ const styles = {
         marginTop: '-4px'
     },
     forgotLink: {
-        color: '#ccff00',
+        color: '#34A853',
         fontSize: '12px',
         cursor: 'pointer'
     },
     submitBtn: {
         width: '100%',
         padding: '12px',
-        backgroundColor: '#ccff00',
+        backgroundColor: '#34A853',
         color: '#000000',
         border: 'none',
         borderRadius: '8px',

@@ -88,7 +88,7 @@ export default function MyClassesPage() {
                                         onClick={() => handleViewStudents(cls._id)}
                                         className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-600/10 text-purple-400 border border-purple-600/20 rounded-lg hover:bg-purple-600 hover:text-white transition"
                                     >
-                                        <Users size={14} /> Students :<span>{students.length}</span>
+                                        <Users size={14} /> Students
                                     </button>
                                 </td>
                             </tr>

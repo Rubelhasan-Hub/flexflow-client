@@ -157,7 +157,7 @@ export default function RegisterPage() {
                 <div className="lg:col-span-7 p-8 md:p-12 flex flex-col justify-center bg-[#0a0f1d]">
                     <div className="mb-6">
                         <h1 className="text-2xl font-bold text-white mb-1.5 tracking-tight">Create account</h1>
-                        <p className="text-xs text-gray-400">Already have an account? <Link href="/login" className="text-green-500 hover:underline font-medium">Sign in</Link></p>
+                        <p className="text-xs text-gray-400">Already have an account? <Link href="/signin" className="text-green-500 hover:underline font-medium">Sign in</Link></p>
                     </div>
 
                     {serverError && (
