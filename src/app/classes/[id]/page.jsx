@@ -6,6 +6,7 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import BookingButton from "@/components/BookingButton";
 
 const DetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -22,6 +23,7 @@ const DetailsPage = async ({ params }) => {
     if (!user) {
         redirect("/signin");
     }
+    
 
     return (
         <div className="min-h-screen bg-[#0a0f1d] text-white py-12 px-4 lg:px-20">
@@ -65,9 +67,15 @@ const DetailsPage = async ({ params }) => {
                     <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl sticky top-24">
                         <div className="text-4xl font-black mb-6">${data.price}<span className="text-sm text-neutral-500 font-normal"> / session</span></div>
 
-                        <Button className="w-full bg-green-500 text-black font-bold h-12 hover:bg-green-400 mb-3">
-                            Book Now — ${data.price}
-                        </Button>
+                        {/* <form action="/api/checkout_sessions" method="POST">
+                            <section>
+                                <Button className="w-full bg-green-500 text-black font-bold h-12 hover:bg-green-400 mb-3" type="submit" role="link">
+                                    Book Now — ${data.price}
+                                </Button>
+                            </section>
+                        </form> */}
+
+                        <BookingButton classData={data} userEmail={user?.email} userName={user?.name || user?.username}/>
 
                         {/* Favorite Button */}
                         <Button
@@ -84,14 +92,15 @@ const DetailsPage = async ({ params }) => {
                     </div>
                 </div>
 
-                <Button className="w-full bg-green-500 text-black font-bold h-12 hover:bg-green-400 mb-3">
 
-                    <Link href="/classes" className="flex items-center gap-2">
+
+                <Link href="/classes" className="flex items-center gap-2">
+                    <Button className="w-full bg-green-500 text-black font-bold h-12 hover:bg-green-400 mb-3">
                         View All Classes <ArrowLeft size={18} />
-                    </Link>
-                </Button>
+                    </Button>
+                </Link>
             </div>
-        </div>
+        </div >
     );
 };
 
