@@ -3,9 +3,9 @@
 // import { getUserSession } from "@/lib/core/session";
 "use client";
 import { useSession } from "@/lib/auth-client";
-import { LayoutSideContentLeft, Bell, Briefcase, Envelope, Gear, House, Magnifier, Person, Bookmark, FileText, CreditCard } from "@gravity-ui/icons";
+import { LayoutSideContentLeft, PersonPlus, Briefcase, CirclePlusFill, Gear, House, Bookmark, StarFill, CreditCard, File, MapPin, ChevronsExpandToLines } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
-import { Building, Train, Users } from "lucide-react";
+import { Building, Users } from "lucide-react";
 import Link from "next/link";
 
 export function DashboardSidebar() {
@@ -19,26 +19,28 @@ export function DashboardSidebar() {
 
     const trainerNavLinks = [
         { icon: House, href: "/dashboard/trainer", label: "Overview" },
-        { icon: Magnifier, href: "/dashboard/trainer/add-class", label: "Add Class" },
-        { icon: Bell, href: "/dashboard/trainer/my-classes", label: "My Classes" },
-        { icon: Briefcase, href: "/dashboard/trainer/add-forum-post", label: "Add Forum Post" },
-        { icon: Briefcase, href: "/dashboard/trainer/my-forum-posts", label: "My Forum Posts" },
+        { icon: CirclePlusFill, href: "/dashboard/trainer/add-class", label: "Add Class" },
+        { icon: PersonPlus, href: "/dashboard/trainer/my-classes", label: "My Classes" },
+        { icon: CirclePlusFill, href: "/dashboard/trainer/add-forum-post", label: "Add Forum Post" },
+        { icon: File, href: "/dashboard/trainer/my-forum-posts", label: "My Forum Posts" },
     ]
 
     const userNavLinks = [
         { icon: House, href: "/dashboard/user", label: "Overview" },
         { icon: Bookmark, href: "/dashboard/user/booked-classes", label: "Booked Classes" },
-        { icon: FileText, href: "/dashboard/user/Favorites", label: "Favorites" },
-        { icon: CreditCard, href: "/dashboard/user/apply-as-trainer", label: "Apply as Trainer" },
+        { icon: StarFill, href: "/dashboard/user/favorites", label: "Favorites" },
+        { icon: MapPin, href: "/dashboard/user/apply-as-trainer", label: "Apply as Trainer" },
     ];
 
     const adminNavLinks = [
-        { icon: House, href: "/dashboard/admin", label: "Dashboard" },
-        { icon: Users, href: "/dashboard/admin/users", label: "Users" },
-        { icon: Building, href: "/dashboard/admin/companies", label: "Companies" },
-        { icon: Briefcase, href: "/dashboard/admin/jobs", label: "Jobs" },
-        { icon: CreditCard, href: "/dashboard/admin/payments", label: "Payments" },
-        { icon: Gear, href: "/dashboard/admin/settings", label: "Settings" },
+        { icon: House, href: "/dashboard/admin", label: "Overview" },
+        { icon: ChevronsExpandToLines, href: "/dashboard/admin/manage-users", label: "Manage Users" },
+        { icon: Building, href: "/dashboard/admin/applied-trainers", label: "Applied Trainers" },
+        { icon: Briefcase, href: "/dashboard/admin/manage-trainers", label: "Manage Trainers" },
+        { icon: CreditCard, href: "/dashboard/admin/manage-classes", label: "Manage Classes" },
+        { icon: Gear, href: "/dashboard/admin/add-forum-post", label: "Add Forum Post" },
+        { icon: Gear, href: "/dashboard/admin/transactions", label: "Transactions " },
+        { icon: Gear, href: "/dashboard/admin/forum-post-manage", label: "Forum Post Manage " },
     ];
 
     const navLinksMap = {

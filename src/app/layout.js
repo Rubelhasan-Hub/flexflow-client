@@ -29,8 +29,8 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <NavbarPage />
         <main>
-          <ToastProvider position="top-right" reverseOrder={false} />
           {children}
+          <ToastProvider position="top-right" reverseOrder={false} />
         </main>
         <Footer />
       </body>

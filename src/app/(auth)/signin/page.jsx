@@ -194,7 +194,7 @@ const styles = {
         padding: '20px'
     },
     card: {
-        display: 'md:flex',
+        display: 'lg:flex',
         width: '100%',
         maxWidth: '960px',
         backgroundColor: '#121826',
