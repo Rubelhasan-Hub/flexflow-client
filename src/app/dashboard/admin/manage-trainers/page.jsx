@@ -3,17 +3,27 @@ import React, { useEffect, useState } from 'react';
 
 export default function ManageTrainersPage() {
     const [trainers, setTrainers] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchTrainers();
     }, []);
 
     const fetchTrainers = async () => {
-        // শুধুমাত্র যারা 'trainer' রোলের ইউজার তাদের ডাটা ফেচ করুন
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user`);
-        const data = await res.json();
-        const activeTrainers = data.filter(user => user.role === 'trainer');
-        setTrainers(activeTrainers);
+        try {
+            setLoading(true);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user`);
+            const data = await res.json();
+            
+            // ডাটাবেসের সাথে মিলিয়ে ফিল্টার করা হচ্ছে (role === 'trainer')
+            // যদি ডাটাবেসে রোল 'trainer' থাকে তবেই এখানে দেখাবে।
+            const activeTrainers = data.filter(user => user.role === 'trainer');
+            setTrainers(activeTrainers);
+        } catch (error) {
+            console.error("Error fetching trainers:", error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleDemote = async (id) => {
@@ -23,7 +33,9 @@ export default function ManageTrainersPage() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ role: 'user' })
             });
-            if (res.ok) fetchTrainers(); // লিস্ট রিফ্রেশ করুন
+            if (res.ok) {
+                fetchTrainers(); // লিস্ট রিফ্রেশ করা
+            }
         }
     };
 
@@ -41,20 +53,31 @@ export default function ManageTrainersPage() {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-neutral-800">
-                        {trainers.map((trainer) => (
-                            <tr key={trainer._id} className="hover:bg-neutral-900/50">
-                                <td className="p-4">{trainer.userName}</td>
-                                <td className="p-4">{trainer.userEmail}</td>
-                                <td className="p-4">
-                                    <button 
-                                        onClick={() => handleDemote(trainer._id)}
-                                        className="bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded text-xs transition"
-                                    >
-                                        Demote to User
-                                    </button>
+                        {loading ? (
+                            <tr><td colSpan="3" className="p-4 text-center">Loading...</td></tr>
+                        ) : trainers.length > 0 ? (
+                            trainers.map((trainer) => (
+                                <tr key={trainer._id} className="hover:bg-neutral-900/50">
+                                    {/* এখানে ডাটাবেসের ফিল্ড অনুযায়ী 'name' ও 'email' ব্যবহার করা হয়েছে */}
+                                    <td className="p-4">{trainer.name}</td>
+                                    <td className="p-4">{trainer.email}</td>
+                                    <td className="p-4">
+                                        <button 
+                                            onClick={() => handleDemote(trainer._id)}
+                                            className="bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded text-xs transition"
+                                        >
+                                            Demote to User
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="3" className="p-4 text-center text-neutral-500">
+                                    No active trainers found
                                 </td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </div>
