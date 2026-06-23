@@ -25,7 +25,6 @@ export async function POST(req) {
         userName: userName,
         className: classData.className,
         trainerName: classData.trainerName,
-        // অ্যারে যেহেতু মেটাডেটাতে সরাসরি যায় না, তাই JSON হিসেবে পাঠাচ্ছি
         scheduleDays: JSON.stringify(classData.scheduleDays) 
       },
       success_url: `${process.env.BETTER_AUTH_URL}/success?session_id={CHECKOUT_SESSION_ID}`,

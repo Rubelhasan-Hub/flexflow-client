@@ -92,7 +92,7 @@ const AddClassForm = () => {
     };
 
     return (
-        <div style={styles.container}>
+        <div style={styles.container} className='md:p-5'>
             <form onSubmit={handleSubmit} style={styles.form}>
                 <h2 style={styles.header}>Add New Class</h2>
 
@@ -166,7 +166,7 @@ const AddClassForm = () => {
 };
 
 const styles = {
-    container: { padding: '20px', backgroundColor: '#070a12', minHeight: '100vh', display: 'flex', justifyContent: 'center' },
+    container: { backgroundColor: '#070a12', minHeight: '100vh', display: 'flex', justifyContent: 'center' },
     form: { width: '100%', maxWidth: '900px', backgroundColor: '#121826', padding: '30px', borderRadius: '16px' },
     header: { color: '#fff', marginBottom: '20px' },
     row: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' },

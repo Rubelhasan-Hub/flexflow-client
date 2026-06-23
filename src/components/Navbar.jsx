@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation'; // নতুন ইমপোর্ট
 import { Button } from "@heroui/react";
 import { ArrowRightFromSquare } from '@gravity-ui/icons';
 import Link from 'next/link';
@@ -9,6 +10,7 @@ import { authClient, useSession } from '@/lib/auth-client';
 const NavbarPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const pathname = usePathname(); // বর্তমান রুটের জন্য
 
     const { data: session } = useSession();
     const user = session?.user;
@@ -51,12 +53,11 @@ const NavbarPage = () => {
 
                     <Link href="/">
                         <div className="flex items-center cursor-pointer gap-2">
-                           
-                            <Image 
-                                src='/flexflow--logo.png' 
-                                alt='websites logo' 
-                                width={100} 
-                                height={70} 
+                            <Image
+                                src='/flexflow--logo.png'
+                                alt='websites logo'
+                                width={100}
+                                height={70}
                                 className="object-contain"
                             />
                             <p className="font-bold text-xl tracking-wider text-white">
@@ -66,14 +67,14 @@ const NavbarPage = () => {
                     </Link>
                 </div>
 
-                {/* Desktop Links - ইউজার রোল অনুযায়ী লজিক সহজ করা হয়েছে */}
+                {/* Desktop Links */}
                 <div className="hidden sm:flex items-center gap-6">
-                    <Link href="/" className="text-green-500 font-semibold text-sm">Home</Link>
-                    <Link href="/classes" className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">All Classes</Link>
-                    <Link href="/forum" className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">Community Forum</Link>
-                    
+                    <Link href="/" className={`${pathname === '/' ? 'text-green-500' : 'text-gray-300'} font-semibold text-sm transition-colors`}>Home</Link>
+                    <Link href="/classes" className={`${pathname === '/classes' ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-sm transition-colors`}>All Classes</Link>
+                    <Link href="/forum" className={`${pathname === '/forum' ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-sm transition-colors`}>Community Forum</Link>
+
                     {user && (
-                        <Link href={`/dashboard/${user.role}`} className="text-gray-300 hover:text-green-500 font-medium text-sm transition-colors">
+                        <Link href={`/dashboard/${user.role}`} className={`${pathname.startsWith('/dashboard') ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-sm transition-colors`}>
                             Dashboard
                         </Link>
                     )}
@@ -101,6 +102,20 @@ const NavbarPage = () => {
                     )}
                 </div>
             </div>
+
+            {/* Mobile Menu */}
+            {isMenuOpen && (
+                <div className="sm:hidden bg-[#0a0f1d] border-b border-neutral-800 p-4 flex flex-col gap-4">
+                    <Link href="/" className={`${pathname === '/' ? 'text-green-500' : 'text-gray-300'} font-medium`} onClick={() => setIsMenuOpen(false)}>Home</Link>
+                    <Link href="/classes" className={`${pathname === '/classes' ? 'text-green-500' : 'text-gray-300'} font-medium`} onClick={() => setIsMenuOpen(false)}>All Classes</Link>
+                    <Link href="/forum" className={`${pathname === '/forum' ? 'text-green-500' : 'text-gray-300'} font-medium`} onClick={() => setIsMenuOpen(false)}>Community Forum</Link>
+                    {user && (
+                        <Link href={`/dashboard/${user.role}`} className={`${pathname.startsWith('/dashboard') ? 'text-green-500' : 'text-gray-300'} font-medium`} onClick={() => setIsMenuOpen(false)}>
+                            Dashboard
+                        </Link>
+                    )}
+                </div>
+            )}
         </nav>
     );
 };

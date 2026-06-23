@@ -69,7 +69,7 @@ const Login = () => {
 
     return (
         <div style={styles.container}>
-            <div style={styles.card}>
+            <div style={styles.card} className='md:flex'>
 
                 {/* LEFT BRAND SECTION (Shudhu Website Header & Welcome Text) */}
                 <div style={styles.leftSection}>
@@ -194,7 +194,6 @@ const styles = {
         padding: '20px'
     },
     card: {
-        display: 'lg:flex',
         width: '100%',
         maxWidth: '960px',
         backgroundColor: '#121826',

@@ -27,7 +27,7 @@ export default function HomePage({ classes }) {
         <div className="w-full bg-[#0a0f1d] text-gray-300 font-sans selection:bg-green-500 selection:text-black overflow-hidden">
             
             {/* ================= 1. BANNER / HERO SECTION ================= */}
-            <section className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-16">
+            <section className="relative md:min-h-screen flex items-center justify-center px-4 pt-24 pb-16">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.08),transparent_50%)]" />
                 <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(10,15,29,0)_60%,#0a0f1d_100%)]" />
 
