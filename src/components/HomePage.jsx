@@ -1,8 +1,10 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { Button } from '@heroui/react';
+import { ArrowRight } from '@gravity-ui/icons';
 
 export default function HomePage({ classes }) {
 
@@ -16,16 +18,27 @@ export default function HomePage({ classes }) {
     // Framer Motion Animation Variants (Safe Configuration)
     const fadeInUp = {
         hidden: { opacity: 0, y: 25 },
-        visible: { 
-            opacity: 1, 
+        visible: {
+            opacity: 1,
             y: 0,
             transition: { duration: 0.6, ease: "easeOut" }
         }
     };
 
+
+    const [posts, setPosts] = useState([]);
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+    useEffect(() => {
+        fetch(`${baseUrl}/api/forum-posts`)
+            .then(res => res.json())
+            .then(data => setPosts(data))
+            .catch(err => console.error("Error:", err));
+    }, [baseUrl]);
+
     return (
         <div className="w-full bg-[#0a0f1d] text-gray-300 font-sans selection:bg-green-500 selection:text-black overflow-hidden">
-            
+
             {/* ================= 1. BANNER / HERO SECTION ================= */}
             <section className="relative md:min-h-screen flex items-center justify-center px-4 pt-24 pb-16">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.08),transparent_50%)]" />
@@ -61,7 +74,7 @@ export default function HomePage({ classes }) {
                     {/* Right Interactive Images */}
 
 
-                    
+
                     <div className="lg:col-span-5 grid grid-cols-12 gap-4 relative w-full h-100 sm:h-112.5">
                         <div className="col-span-7 h-full rounded-2xl overflow-hidden border border-neutral-800 relative group bg-neutral-900/40">
                             <Image height={200} width={300} src="/images (2).jpeg" alt="Grind harder" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -98,17 +111,17 @@ export default function HomePage({ classes }) {
 
 
             {/* ================= 2. DYNAMIC SECTION 1: FEATURED CLASSES ================= */}
-            <section className="max-w-7xl mx-auto px-4 py-20 md:py-28">
+            <section className="max-w-7xl mx-auto px-4 py-10 md:py-10">
                 <div className="text-center mb-16">
                     <p className="text-green-400 font-semibold text-xs uppercase tracking-widest mb-2">CHOOSE YOUR WAR</p>
                     <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Elite Training Programs</h2>
                     <p className="text-gray-500 text-sm mt-3 max-w-md mx-auto">Success does not just find you. You have to go out and get it. Pick a discipline and dominate.</p>
                 </div>
 
-               
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {classes.map((item) => (
-                        <motion.div 
+                    {classes.slice(0, 3).map((item) => (
+                        <motion.div
                             key={item._id}
                             variants={fadeInUp}
                             initial="hidden"
@@ -152,6 +165,14 @@ export default function HomePage({ classes }) {
                     ))}
                 </div>
             </section>
+                <div className='flex justify-center text-xl'>
+                    <Link href='/classes' className="flex justify-content text-green-500">
+                        <div className='flex items-center justify-center gap-2'>
+                            <p className='pb-0.4 border-b border-green-500'>View All Classes</p>
+                            <ArrowRight />
+                        </div>
+                    </Link>
+                </div>
 
 
             {/* ================= EXTRA STATIC SECTION 2: BMI CALCULATOR ================= */}
@@ -198,29 +219,54 @@ export default function HomePage({ classes }) {
                     <p className="text-gray-500 text-sm mt-3 max-w-sm mx-auto">Surround yourself with those on the same mission. Read, learn, and share your victories.</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {latestPosts.map((post) => (
-                        <div key={post.id} className="bg-[#0e1424] border border-neutral-900 rounded-2xl p-6 flex flex-col justify-between hover:border-neutral-800 transition-all group">
-                            <div>
-                                <div className="flex items-center justify-between mb-4">
-                                    <span className="text-[10px] uppercase font-bold tracking-wider text-green-400 px-2 py-0.5 rounded bg-green-500/5 border border-green-500/10">
-                                        {post.category}
-                                    </span>
-                                    <span className="text-xs text-gray-600">{post.time}</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {posts.slice(0, 3).map((post, index) => (
+                        <motion.div
+                            key={post._id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="bg-[#0a0f1d] border border-neutral-800 rounded-2xl overflow-hidden hover:border-green-500/50 transition-all duration-300 group"
+                        >
+                            <div className="relative h-56 overflow-hidden">
+                                <Image width={500} height={500} alt={post.title} src={post.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-green-400 border border-white/10">
+                                    {post.authorRole || "Trainer"}
                                 </div>
-                                <h3 className="text-base font-bold text-white mb-3 group-hover:text-green-400 transition-colors line-clamp-2 cursor-pointer">
+                            </div>
+
+                            <div className="p-6">
+                                <h2 className="text-xl font-bold mb-3 line-clamp-1 group-hover:text-green-500 transition-colors">
                                     {post.title}
-                                </h3>
+                                </h2>
+                                <p className="text-gray-400 text-sm mb-6 line-clamp-3 leading-relaxed">
+                                    {post.description}
+                                </p>
+
+                                <div className="flex items-center justify-between border-t border-neutral-800 pt-4">
+                                    <span className="text-[10px] text-neutral-500 font-medium">By {post.authorName}</span>
+                                    <Link href={`/forum/${post._id}`}>
+                                        <button className="bg-white text-black px-4 py-2 rounded-lg font-bold text-xs hover:bg-green-500 transition-colors cursor-pointer">
+                                            Read More
+                                        </button>
+                                    </Link>
+                                </div>
                             </div>
-                            <div className="pt-4 border-t border-neutral-900/60 flex items-center justify-between text-xs text-gray-500">
-                                <span>Intel by <strong className="text-gray-400 font-medium">{post.author}</strong></span>
-                                <span className="flex items-center gap-1">💬 {post.replies} Replies</span>
-                            </div>
-                        </div>
+                        </motion.div>
+
                     ))}
+
                 </div>
             </section>
 
+            <div className='flex justify-center text-xl'>
+                <Link href='/forum' className="flex justify-content text-green-500">
+                    <div className='flex items-center justify-center gap-2'>
+                        <p className='pb-0.4 border-b border-green-500'>View All forum posts</p>
+                        <ArrowRight />
+                    </div>
+                </Link>
+            </div>
         </div>
     );
 }
