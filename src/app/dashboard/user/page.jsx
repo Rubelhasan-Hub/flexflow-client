@@ -5,7 +5,6 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 
 const UserDashboard = () => {
-    // শুধুমাত্র useSession ব্যবহার করুন, getUserSession এর প্রয়োজন নেই
     const { data: session } = useSession();
     
     const [statusData, setStatusData] = useState(null);
@@ -13,13 +12,11 @@ const UserDashboard = () => {
 
     useEffect(() => {
         if (session?.user?.email) {
-            // ১. অ্যাপ্লিকেশনের স্ট্যাটাস (আপনার API রুট ঠিক আছে কি না নিশ্চিত করুন)
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/trainer_apply/${session.user.email}`)
                 .then((res) => res.json())
                 .then((data) => setStatusData(data))
                 .catch((err) => console.error("Error fetching status:", err));
 
-            // ২. বুকিং এবং ফেভারিট কাউন্ট (এই রুটটি সার্ভারে তৈরি থাকতে হবে)
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user-stats/${session.user.email}`)
                 .then((res) => res.json())
                 .then((data) => setStats(data))
@@ -35,14 +32,12 @@ const UserDashboard = () => {
         <div style={styles.page}>
             <h1 style={styles.pageTitle}>Overview</h1>
 
-            {/* ডাইনামিক Stats সেকশন */}
             <div style={styles.statsContainer}>
                 <div style={styles.statCard}><span>📖 {stats.bookedCount} Booked Classes</span></div>
                 <div style={styles.statCard}><span>❤️ {stats.favoriteCount} Favorites</span></div>
                 <div style={styles.statCard}><span>⭐ {session?.user?.role || 'Member'} (Role)</span></div>
             </div>
 
-            {/* Trainer Application Section */}
             <div style={styles.card}>
                 <h2 style={styles.sectionTitle}>Trainer Application</h2>
                 <div style={styles.statusBox}>
@@ -57,7 +52,7 @@ const UserDashboard = () => {
                             {statusData.status === 'rejected' && (
                                 <div style={styles.feedbackBox}>
                                     <p style={{ margin: 0, color: '#f87171' }}>Feedback:</p>
-                                    {statusData.rejectionReason || 'No reason provided.'}
+                                    {statusData.feedback || 'No reason provided.'}
                                 </div>
                             )}
                         </>
@@ -67,7 +62,6 @@ const UserDashboard = () => {
                 </div>
             </div>
 
-            {/* চার্ট সেকশন */}
             <div style={styles.row}>
                 <div style={styles.card}>
                     <h2 style={styles.sectionTitle}>Classes by Category</h2>

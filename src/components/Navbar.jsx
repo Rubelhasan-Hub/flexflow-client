@@ -96,7 +96,7 @@ const NavbarPage = () => {
                         <div className="flex items-center gap-3">
                             <Link href="/signin" className="text-gray-200 hover:text-green-500 transition-colors text-sm font-medium">Login</Link>
                             <Button as={Link} href="/signup" className="bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-colors h-9 px-4 rounded-xl">
-                                Register
+                                <Link href="signup">Register</Link>
                             </Button>
                         </div>
                     )}
