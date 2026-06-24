@@ -64,6 +64,8 @@ const NavbarPage = () => {
                                 Flex<span className="text-green-500">Flow</span>
                             </p>
                         </div>
+
+
                     </Link>
                 </div>
 
@@ -85,8 +87,18 @@ const NavbarPage = () => {
                     {user ? (
                         <div className="flex items-center gap-3">
                             <span className="text-gray-200 text-xl font-medium hidden md:inline-block">{user?.name}</span>
-                            <div className="w-7 h-7 rounded-full overflow-hidden border-2 border-green-500">
+                            {/* <div className="w-7 h-7 rounded-full overflow-hidden border-2 border-green-500">
                                 <Image height={38} width={58} src={user?.image || "/default-avatar.png"} alt={user?.name} className="w-full h-full object-cover" />
+                            </div> */}
+
+                            <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-green-500 relative">
+                                <Image
+                                    src={user?.image || "/default-avatar.png"}
+                                    alt={user?.name || "User Avatar"}
+                                    fill
+                                    sizes="32px"
+                                    className="object-cover"
+                                />
                             </div>
                             <Button color="danger" variant="light" size="xl" onClick={handleLogout} className="text-red-500 font-medium h-9 px-3 rounded-xl hover:bg-red-950/20 text-xl" startContent={<ArrowRightFromSquare className="w-4 h-4" />}>
                                 Log Out

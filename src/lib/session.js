@@ -13,6 +13,13 @@ export const getUserSession = async () => {
         return null;
     }
 };
+export const getUserToken = async () => {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    })
+    return session?.session?.token || null;
+
+};
 
 export const requireRole = async (role) => {
     const user = await getUserSession();
@@ -22,3 +29,11 @@ export const requireRole = async (role) => {
 
     return user;
 };
+
+export const authHeader = async () => {
+    const token = await getUserToken()
+    const header = {
+        authorization: `Bearer ${token}`
+    }
+    return token ? header : {};
+} 

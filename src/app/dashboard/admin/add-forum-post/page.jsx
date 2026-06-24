@@ -47,7 +47,9 @@ export default function AddForumPost() {
 
                 const res = await fetch(`${baseUrl}/api/forum-posts`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                     body: JSON.stringify(postData)
                 });
 
@@ -76,7 +78,7 @@ export default function AddForumPost() {
                     <label className="block text-sm mb-2 font-semibold">Title</label>
                     <input name="title" placeholder="Enter post title" className="w-full p-3 bg-neutral-900 rounded-lg border border-neutral-700 focus:outline-none focus:border-green-500" required />
                 </div>
-                
+
                 <div>
                     <label className="block text-sm mb-2 font-semibold">Upload Image</label>
                     <input type="file" name="image" accept="image/*" className="w-full p-3 bg-neutral-900 rounded-lg border border-neutral-700" required />
@@ -87,8 +89,8 @@ export default function AddForumPost() {
                     <textarea name="description" placeholder="Write your thoughts..." className="w-full p-3 bg-neutral-900 rounded-lg border border-neutral-700 h-32 focus:outline-none focus:border-green-500" required />
                 </div>
 
-                <button 
-                    disabled={loading} 
+                <button
+                    disabled={loading}
                     className={`w-full py-3 rounded-lg font-bold transition ${loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-green-500 hover:bg-green-400 text-black'}`}
                 >
                     {loading ? "Publishing..." : "Publish Post"}

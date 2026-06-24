@@ -1,8 +1,13 @@
 // components/DashboardLayout.js
 import { DashboardSidebar } from '@/dashboardComponents/DashboardSidebar';
+import { getUserToken } from '@/lib/session';
 import React from 'react';
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = async ({ children }) => {
+
+    const token = await getUserToken()
+    console.log(token);
+
     return (
         <div className='flex min-h-screen'>
             <div className="hidden lg:block w-64 border-r border-default">

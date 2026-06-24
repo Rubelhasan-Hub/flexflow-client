@@ -8,12 +8,22 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import BookingButton from "@/components/BookingButton";
 import FavoriteButton from "./FavoriteButton";
+import { authHeader } from "@/lib/session";
 
 const DetailsPage = async ({ params }) => {
     const { id } = await params;
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    const res = await fetch(`${baseUrl}/api/all-classes/${id}`, { cache: 'no-store' });
+    const authHeaders = await authHeader();
+
+    const res = await fetch(`${baseUrl}/api/all-classes/${id}`, {
+        cache: 'no-store',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            ...authHeaders
+        }
+    });
     const data = await res.json();
 
     const session = await auth.api.getSession({
@@ -91,6 +101,8 @@ const DetailsPage = async ({ params }) => {
         </div >
     );
 };
+
+
 
 const DetailCard = ({ icon, title, value }) => (
     <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl">

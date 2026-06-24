@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 export default function ManageUsersPage() {
     const [users, setUsers] = useState([]);
 
+
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user`)
             .then(res => res.json())

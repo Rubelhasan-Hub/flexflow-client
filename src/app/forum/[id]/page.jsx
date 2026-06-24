@@ -5,6 +5,7 @@ import { useSession } from "@/lib/auth-client";
 import Image from "next/image";
 import { FiThumbsUp, FiThumbsDown, FiTrash2, FiSend } from "react-icons/fi";
 
+
 export default function PostDetails() {
     const { id } = useParams();
     const { data: session } = useSession();
@@ -12,20 +13,24 @@ export default function PostDetails() {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
+    
+    
     const fetchData = () => {
         fetch(`${baseUrl}/api/forum-posts/${id}`).then(res => res.json()).then(setPost);
         fetch(`${baseUrl}/api/comments/${id}`).then(res => res.json()).then(setComments);
     };
-
+    
     useEffect(() => { fetchData(); }, [id, baseUrl]);
-
+    
     // Voting Logic
+    
     const handleVote = async (voteType) => {
         if (!session?.user) return;
         await fetch(`${baseUrl}/api/forum-posts/${id}/vote`, {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({ email: session.user.email, voteType })
         });
         fetchData();
@@ -45,7 +50,7 @@ export default function PostDetails() {
 
     // Delete Logic - ADDED THIS
     const handleDeleteComment = async (commentId) => {
-        
+
         await fetch(`${baseUrl}/api/comments/${commentId}`, {
             method: 'DELETE',
         });
@@ -59,7 +64,7 @@ export default function PostDetails() {
             <div className="relative w-full h-[400px] mb-8 rounded-3xl overflow-hidden shadow-2xl">
                 <Image src={post.image} alt={post.title} fill className="object-cover" />
             </div>
-            
+
             <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">{post.title}</h1>
             <p className="text-gray-400 text-lg mb-10 leading-relaxed">{post.description}</p>
 
@@ -76,7 +81,7 @@ export default function PostDetails() {
             {/* Comment Section */}
             <div className="pt-8 border-t border-neutral-800">
                 <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">Comments</h3>
-                
+
                 <div className="bg-[#0a0f1d] p-4 rounded-2xl border border-neutral-800 mb-8">
                     <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} className="w-full bg-transparent p-2 focus:outline-none" placeholder="Share your thoughts..." rows={3} />
                     <div className="flex justify-end mt-2">
