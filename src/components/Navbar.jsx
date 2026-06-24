@@ -33,8 +33,8 @@ const NavbarPage = () => {
 
     return (
         <nav className="w-full bg-[#0a0f1d] border-b border-neutral-900 sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-                
+            <div className="max-w-7xl mx-auto px-3 h-16 py-10 flex items-center justify-between">
+
                 {/* Logo Section */}
                 <div className="flex items-center gap-4">
                     <button
@@ -56,11 +56,11 @@ const NavbarPage = () => {
                             <Image
                                 src='/flexflow--logo.png'
                                 alt='websites logo'
-                                width={100}
-                                height={70}
+                                width={120}
+                                height={90}
                                 className="object-contain"
                             />
-                            <p className="font-bold text-xl tracking-wider text-white">
+                            <p className="font-bold text-2xl tracking-wider text-white">
                                 Flex<span className="text-green-500">Flow</span>
                             </p>
                         </div>
@@ -69,12 +69,12 @@ const NavbarPage = () => {
 
                 {/* Desktop Links */}
                 <div className="hidden sm:flex items-center gap-6">
-                    <Link href="/" className={`${pathname === '/' ? 'text-green-500' : 'text-gray-300'} font-semibold text-sm transition-colors`}>Home</Link>
-                    <Link href="/classes" className={`${pathname === '/classes' ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-sm transition-colors`}>All Classes</Link>
-                    <Link href="/forum" className={`${pathname === '/forum' ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-sm transition-colors`}>Community Forum</Link>
+                    <Link href="/" className={`${pathname === '/' ? 'text-green-500' : 'text-gray-300'} font-semibold text-xl transition-colors`}>Home</Link>
+                    <Link href="/classes" className={`${pathname === '/classes' ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-xl transition-colors`}>All Classes</Link>
+                    <Link href="/forum" className={`${pathname === '/forum' ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-xl transition-colors`}>Community Forum</Link>
 
                     {user && (
-                        <Link href={`/dashboard/${user.role}`} className={`${pathname.startsWith('/dashboard') ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-sm transition-colors`}>
+                        <Link href={`/dashboard/${user.role}`} className={`${pathname.startsWith('/dashboard') ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-xl transition-colors`}>
                             Dashboard
                         </Link>
                     )}
@@ -84,19 +84,19 @@ const NavbarPage = () => {
                 <div className="flex items-center gap-3">
                     {user ? (
                         <div className="flex items-center gap-3">
-                            <span className="text-gray-200 text-sm font-medium hidden md:inline-block">{user?.name}</span>
+                            <span className="text-gray-200 text-xl font-medium hidden md:inline-block">{user?.name}</span>
                             <div className="w-7 h-7 rounded-full overflow-hidden border-2 border-green-500">
-                                <Image height={28} width={28} src={user?.image || "/default-avatar.png"} alt={user?.name} className="w-full h-full object-cover" />
+                                <Image height={38} width={58} src={user?.image || "/default-avatar.png"} alt={user?.name} className="w-full h-full object-cover" />
                             </div>
-                            <Button color="danger" variant="light" size="sm" onClick={handleLogout} className="text-red-500 font-medium h-9 px-3 rounded-xl hover:bg-red-950/20" startContent={<ArrowRightFromSquare className="w-4 h-4" />}>
+                            <Button color="danger" variant="light" size="xl" onClick={handleLogout} className="text-red-500 font-medium h-9 px-3 rounded-xl hover:bg-red-950/20 text-xl" startContent={<ArrowRightFromSquare className="w-4 h-4" />}>
                                 Log Out
                             </Button>
                         </div>
                     ) : (
                         <div className="flex items-center gap-3">
                             <Link href="/signin" className="text-gray-200 hover:text-green-500 transition-colors text-sm font-medium">Login</Link>
-                            <Button as={Link} href="/signup" className="bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-colors h-9 px-4 rounded-xl">
-                                <Link href="signup">Register</Link>
+                            <Button className="bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-colors h-9 px-4 rounded-xl">
+                                <Link href="/signup">Register</Link>
                             </Button>
                         </div>
                     )}
