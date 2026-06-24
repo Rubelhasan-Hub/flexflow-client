@@ -6,7 +6,9 @@ import Image from 'next/image';
 import { Button } from '@heroui/react';
 import { ArrowRight } from '@gravity-ui/icons';
 
-export default function HomePage({ classes }) {
+export default function HomePage({ classes: rawClasses }) {
+    // FIX: Safely extract the array. If rawClasses is an object, get the 'classes' property; otherwise, use it as is.
+    const classes = rawClasses?.classes || rawClasses || [];
 
     // Latest Forum Posts Mock Data (3 most recent posts)
     const latestPosts = [
@@ -38,9 +40,8 @@ export default function HomePage({ classes }) {
 
     return (
         <div className="w-full bg-[#0a0f1d] text-gray-300 font-sans selection:bg-green-500 selection:text-black overflow-hidden">
-
             {/* ================= 1. BANNER / HERO SECTION ================= */}
-            <section className="relative md:min-h-screen flex items-center justify-center px-4 pt-24 pb-16">
+            <section className="relative md:min-h-screen flex items-center justify-center pb-16">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.08),transparent_50%)]" />
                 <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(10,15,29,0)_60%,#0a0f1d_100%)]" />
 
@@ -72,9 +73,6 @@ export default function HomePage({ classes }) {
                     </div>
 
                     {/* Right Interactive Images */}
-
-
-
                     <div className="lg:col-span-5 grid grid-cols-12 gap-4 relative w-full h-100 sm:h-112.5">
                         <div className="col-span-7 h-full rounded-2xl overflow-hidden border border-neutral-800 relative group bg-neutral-900/40">
                             <Image height={200} width={300} src="/images (2).jpeg" alt="Grind harder" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -253,7 +251,6 @@ export default function HomePage({ classes }) {
                                 </div>
                             </div>
                         </motion.div>
-
                     ))}
 
                 </div>
