@@ -1,12 +1,18 @@
 "use client";
 import { useSession } from '@/lib/auth-client';
+import Image from 'next/image';
 import { useEffect, useState } from "react";
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 
 const UserDashboard = () => {
     const { data: session } = useSession();
-    
+
+    const user = session?.user
+    console.log(user);
+
+
+
     const [statusData, setStatusData] = useState(null);
     const [stats, setStats] = useState({ bookedCount: 0, favoriteCount: 0 });
 
@@ -48,7 +54,7 @@ const UserDashboard = () => {
                             </div>
                             <div style={{ fontSize: '12px', marginTop: '10px' }}>Specialty: {statusData.specialty || 'N/A'}</div>
                             <div style={{ fontSize: '12px' }}>Experience: {statusData.experience || '0'} years</div>
-                            
+
                             {statusData.status === 'rejected' && (
                                 <div style={styles.feedbackBox}>
                                     <p style={{ margin: 0, color: '#f87171' }}>Feedback:</p>
@@ -61,6 +67,33 @@ const UserDashboard = () => {
                     )}
                 </div>
             </div>
+
+
+
+
+            <div style={styles.card}>
+                <h2 style={styles.sectionTitle} className='text-xl'>User Info</h2>
+                <div style={styles.statusBox}>
+                    {user &&
+                        <>
+                            <div className='flex items-center gap-10'>
+                                <div>
+                                    <Image className='rounded-full w-23 h-22' src={user.image} alt={user.name} width={100} height={100}></Image>
+                                </div>
+                                <div className='space-y-1'>
+                                    {user.name}
+                                    <p>{user.email}</p>
+                                    <p><span className='bg-green-300 px-3 text-black font-bold rounded-full'>{user.role}</span></p>
+                                </div>
+
+                            </div>
+                        </>}
+                </div>
+            </div>
+
+
+
+
 
             <div style={styles.row}>
                 <div style={styles.card}>

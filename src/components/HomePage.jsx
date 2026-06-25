@@ -75,14 +75,14 @@ export default function HomePage({ classes: rawClasses }) {
                     {/* Right Interactive Images */}
                     <div className="lg:col-span-5 grid grid-cols-12 gap-4 relative w-full h-100 sm:h-112.5">
                         <div className="col-span-7 h-full rounded-2xl overflow-hidden border border-neutral-800 relative group bg-neutral-900/40">
-                            <Image height={200} width={300} src="/images (2).jpeg" alt="Grind harder" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <Image height={200} width={300} src="/homepage.jpg" alt="Grind harder" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
                         <div className="col-span-5 flex flex-col gap-4 h-full">
                             <div className="h-1/2 rounded-2xl overflow-hidden border border-neutral-800 relative group bg-neutral-900/40">
-                                <Image height={100} width={150} src="/download (1).jpeg" alt="Stay focused" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                <Image height={100} width={150} src="/charles-gaudreault-xXofYCc3hqc-unsplash.jpg" alt="Stay focused" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             </div>
                             <div className="h-1/2 rounded-2xl overflow-hidden border border-neutral-800 relative group bg-neutral-900/40">
-                                <Image height={100} width={150} src="/download.jpeg" alt="Push limits" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                <Image height={100} width={150} src="/wp12424948-fitness-4k-wallpapers.jpg" alt="Push limits" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             </div>
                         </div>
                     </div>

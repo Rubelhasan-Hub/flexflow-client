@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [FLEXFLOW] - Fitness & Gym Management Platform
 
-## Getting Started
+Welcome to **[Your Unique Brand Name]**, a comprehensive platform designed for fitness enthusiasts, trainers, and administrators to streamline gym management and community engagement.
 
-First, run the development server:
+## 🚀 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📋 Purpose
+This platform provides a seamless experience for users to discover and book fitness classes, while empowering trainers to manage their sessions and share knowledge through a dedicated community forum.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ✨ Key Features
+* **Role-Based Access Control:** Dedicated dashboards for Users, Trainers, and Admins.
+* **Class Management:** Browse, filter, and search classes with real-time booking and Stripe payment integration.
+* **Community Forum:** Engage in discussions, like/dislike posts, and comment on trainer/admin content.
+* **Trainer Application:** Seamless process for users to apply as trainers with admin approval workflows.
+* **Secure Authentication:** Powered by Better Auth with Credential and Google Login.
+* **Responsive Design:** Fully optimized for Mobile, Tablet, and Desktop using Tailwind CSS & Framer Motion.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 Tech Stack
+* **Frontend:** Next.js, Tailwind CSS, Framer Motion, HeroUI
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB
+* **Authentication:** Better Auth (JWT-based)
+* **Payments:** Stripe API
+* **Other:** ImgBB (Image Hosting)
 
-## Learn More
+## 📦 Environment Variables
+To run this project locally, create a `.env` file and include the following:
+* `NEXT_PUBLIC_BASE_URL`
+* `MONGODB_URI`
+* `STRIPE_SECRET_KEY`
+* (Add other necessary keys...)
 
-To learn more about Next.js, take a look at the following resources:
+## 💡 How to Run Locally
+1. Clone the repository.
+2. Install dependencies: `npm install`
+3. Set up your environment variables.
+4. Run the development server: `npm run dev`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Built with passion for the Fitness & Gym Management project.*

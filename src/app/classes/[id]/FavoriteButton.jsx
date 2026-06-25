@@ -67,7 +67,7 @@ export default function FavoriteButton({ classData, userEmail }) {
             variant="bordered"
             onClick={handleAddToFavorites}
             isLoading={loading}
-            className={`w-full border-neutral-700 text-white font-bold h-12 flex items-center gap-2 ${isFavorite ? 'bg-green-500/10 border-green-500' : 'hover:bg-neutral-800'}`}
+            className={`w-full border-neutral-700 text-white font-bold h-12 flex items-center gap-2 ${isFavorite ? 'bg-pink-500/50 border-amber-500' : 'hover:bg-neutral-800'}`}
         >
             <Heart size={18} fill={isFavorite ? "currentColor" : "none"} /> 
             {isFavorite ? "Saved to Favorites" : "Add to Favorites"}

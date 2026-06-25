@@ -66,7 +66,7 @@ export function DashboardSidebar() {
     </nav>
 
     return (
-        <div className="md:min-h-screen">
+        <div className="lg:min-h-screen">
             <aside className="hidden w-64 shrink-0 border-r border-default p-4 lg:block">
                 {navContent}
             </aside>

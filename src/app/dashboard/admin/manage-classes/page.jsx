@@ -9,9 +9,14 @@ export default function ManageClassesPage() {
     }, []);
 
     const fetchClasses = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/all-classes`);
-        const data = await res.json();
-        setClasses(data);
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/all-classes`);
+            const data = await res.json();
+            setClasses(Array.isArray(data) ? data : (data.classes || []));
+        } catch (error) {
+            console.error("Error fetching classes:", error);
+            setClasses([]);
+        }
     };
 
     const handleUpdateStatus = async (id, newStatus) => {
@@ -26,7 +31,6 @@ export default function ManageClassesPage() {
     const handleDelete = async (id) => {
         await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/classes/${id}`, { method: 'DELETE' });
         fetchClasses();
-
     };
 
     return (

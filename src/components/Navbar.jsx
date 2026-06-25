@@ -39,7 +39,7 @@ const NavbarPage = () => {
                 <div className="flex items-center gap-4">
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="sm:hidden text-gray-300 focus:outline-none"
+                        className="lg:hidden text-gray-300 focus:outline-none"
                         aria-label="Toggle menu"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +70,7 @@ const NavbarPage = () => {
                 </div>
 
                 {/* Desktop Links */}
-                <div className="hidden sm:flex items-center gap-6">
+                <div className="hidden lg:flex items-center gap-6">
                     <Link href="/" className={`${pathname === '/' ? 'text-green-500' : 'text-gray-300'} font-semibold text-xl transition-colors`}>Home</Link>
                     <Link href="/classes" className={`${pathname === '/classes' ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-xl transition-colors`}>All Classes</Link>
                     <Link href="/forum" className={`${pathname === '/forum' ? 'text-green-500' : 'text-gray-300 hover:text-green-500'} font-medium text-xl transition-colors`}>Community Forum</Link>
@@ -117,7 +117,7 @@ const NavbarPage = () => {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="sm:hidden bg-[#0a0f1d] border-b border-neutral-800 p-4 flex flex-col gap-4">
+                <div className="lg:hidden bg-[#0a0f1d] border-b border-neutral-800 p-4 flex flex-col gap-4">
                     <Link href="/" className={`${pathname === '/' ? 'text-green-500' : 'text-gray-300'} font-medium`} onClick={() => setIsMenuOpen(false)}>Home</Link>
                     <Link href="/classes" className={`${pathname === '/classes' ? 'text-green-500' : 'text-gray-300'} font-medium`} onClick={() => setIsMenuOpen(false)}>All Classes</Link>
                     <Link href="/forum" className={`${pathname === '/forum' ? 'text-green-500' : 'text-gray-300'} font-medium`} onClick={() => setIsMenuOpen(false)}>Community Forum</Link>
