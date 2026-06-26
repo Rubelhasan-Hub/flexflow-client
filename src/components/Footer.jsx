@@ -6,10 +6,8 @@ import Image from 'next/image';
 const Footer = () => {
     return (
         <footer className="w-full bg-[#080d16] text-gray-400 border-t border-neutral-900 transition-colors">
-            {/* মেইন গ্রিড লেআউট - ৪টি কলাম বিশিষ্ট রেসপন্সিভ স্ট্রাকচার */}
             <div className="max-w-7xl mx-auto px-4 py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
                 
-                {/* ১. সাবস্ক্রিপশন / নিউজলেটার সেকশন */}
                 <div className="flex flex-col gap-4">
                     <p className="text-white font-semibold text-sm tracking-widest uppercase">Join Our Wave</p>
                     <p className="text-sm text-gray-400 leading-relaxed">
@@ -27,11 +25,10 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* ২. Contact Information (যোগাযোগের তথ্য) */}
                 <div className="flex flex-col gap-4">
                     <p className="text-white font-semibold text-sm tracking-widest uppercase">Get In Touch</p>
                     <div className="flex flex-col gap-3.5 text-sm">
-                        {/* ঠিকানা */}
+            
                         <div className="flex items-start gap-2.5">
                             <svg className="w-5 h-5 text-green-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
@@ -39,7 +36,6 @@ const Footer = () => {
                             </svg>
                             <span className="leading-relaxed">Cyber Hub, Level 4, Sector 11, Uttara, Dhaka</span>
                         </div>
-                        {/* ইমেইল */}
                         <div className="flex items-center gap-2.5">
                             <svg className="w-5 h-5 text-green-600 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -47,7 +43,6 @@ const Footer = () => {
                             </svg>
                             <span className="truncate">support@flexflow.com</span>
                         </div>
-                        {/* ফোন নম্বর */}
                         <div className="flex items-center gap-2.5">
                             <svg className="w-5 h-5 text-green-600 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -57,7 +52,6 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* ৩. Quick Links (প্রয়োজনীয় লিংকসমূহ) */}
                 <div className="flex flex-col gap-4">
                     <p className="text-white font-semibold text-sm tracking-widest uppercase">Quick Links</p>
                     <div className="flex flex-col gap-2.5 text-sm">
@@ -68,9 +62,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* ৪. Logo এবং Social Media Links (নতুন X লোগো সহ) */}
                 <div className="flex flex-col gap-4 lg:items-end lg:text-right">
-                    {/* লোগো এলিমেন্ট */}
                     <div className="gap-2 cursor-pointer lg:justify-end">
                         <Image src='/flexflow--logo.png' height={120} width={120} alt='websites logo'/>
                         <p className="font-bold text-xl tracking-wider text-white">
@@ -82,9 +74,7 @@ const Footer = () => {
                         A modern ecosystem designed to optimize your digital and physical fitness workflow.
                     </p>
                     
-                    {/* সোশ্যাল মিডিয়া আইকনসমূহ (নতুন X লোগো সহ) */}
                     <div className="flex items-center gap-3 mt-2 lg:justify-end">
-                        {/* নতুন X (Twitter) লোগো */}
                         <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-xl bg-neutral-900 border border-neutral-800 hover:border-green-600 hover:text-white transition-all" aria-label="X">
                             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -109,13 +99,10 @@ const Footer = () => {
 
             </div>
 
-            {/* ৫. Copyright Info (কপিরাইট তথ্য) */}
             <div className="w-full border-t border-neutral-900 bg-[#050910] py-6">
                 <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-                    {/* কপিরাইট টেক্সট */}
                     <p>© 2026 FlexFlow Ecosystem. All Rights Reserved.</p>
                     
-                    {/* অতিরিক্ত লিগ্যাল পেজ লিংক */}
                     <div className="flex items-center gap-6">
                         <Link href="/privacy" className="hover:text-green-600 transition-colors">Privacy Policy</Link>
                         <Link href="/terms" className="hover:text-green-600 transition-colors">Terms of Use</Link>

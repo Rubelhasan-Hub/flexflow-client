@@ -7,11 +7,10 @@ export default function AppliedTrainersPage() {
     const [feedback, setFeedback] = useState("");
 
     useEffect(() => {
-        // ডাটা আনছি
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/trainer-applications`)
             .then(res => res.json())
             .then(data => {
-                console.log("Data from DB:", data); // চেক করার জন্য
+                console.log("Data from DB:", data);
                 setApplications(data);
             })
             .catch(err => console.error("Fetch Error:", err));
@@ -31,7 +30,6 @@ export default function AppliedTrainersPage() {
         <div className="p-6 bg-[#0a0f1d] min-h-screen text-white">
             <h2 className="text-2xl font-bold mb-6">Applied Trainers</h2>
 
-            {/* ডাটা যদি ফাঁকা হয় তবে মেসেজ দেখাবে */}
             {applications.length === 0 ? (
                 <div className="text-center py-10 text-gray-400">No applications found.</div>
             ) : (
@@ -66,7 +64,6 @@ export default function AppliedTrainersPage() {
                 </div>
             )}
 
-            {/* মোডাল - এটা বাইরে থাকবে */}
             {selectedApp && (
                 <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
                     <div className="bg-[#1e293b] p-6 rounded-xl w-full max-w-md border border-neutral-700">

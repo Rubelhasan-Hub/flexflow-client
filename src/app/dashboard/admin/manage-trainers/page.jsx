@@ -15,8 +15,6 @@ export default function ManageTrainersPage() {
             const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user`);
             const data = await res.json();
             
-            // ডাটাবেসের সাথে মিলিয়ে ফিল্টার করা হচ্ছে (role === 'trainer')
-            // যদি ডাটাবেসে রোল 'trainer' থাকে তবেই এখানে দেখাবে।
             const activeTrainers = data.filter(user => user.role === 'trainer');
             setTrainers(activeTrainers);
         } catch (error) {
@@ -34,7 +32,7 @@ export default function ManageTrainersPage() {
                 body: JSON.stringify({ role: 'user' })
             });
             if (res.ok) {
-                fetchTrainers(); // লিস্ট রিফ্রেশ করা
+                fetchTrainers();
             }
         }
     };
@@ -58,7 +56,6 @@ export default function ManageTrainersPage() {
                         ) : trainers.length > 0 ? (
                             trainers.map((trainer) => (
                                 <tr key={trainer._id} className="hover:bg-neutral-900/50">
-                                    {/* এখানে ডাটাবেসের ফিল্ড অনুযায়ী 'name' ও 'email' ব্যবহার করা হয়েছে */}
                                     <td className="p-4">{trainer.name}</td>
                                     <td className="p-4">{trainer.email}</td>
                                     <td className="p-4">

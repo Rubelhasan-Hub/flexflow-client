@@ -13,7 +13,6 @@ export default function MyClassesPage() {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showStudentModal, setShowStudentModal] = useState(false);
 
-    // ডিলিট করার জন্য স্টেট
     const [deleteId, setDeleteId] = useState(null);
     const [deleteClassTitle, setDeleteClassTitle] = useState("");
 

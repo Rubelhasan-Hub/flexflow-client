@@ -22,7 +22,6 @@ export default function OverviewPage() {
             
             setStats({ totalClasses, totalStudents });
 
-            // চার্টের জন্য ডাটা তৈরি
             const data = classes.map(cls => ({
                 name: cls.className.slice(0, 10) + '...',
                 students: cls.enrolledStudents?.length || 0

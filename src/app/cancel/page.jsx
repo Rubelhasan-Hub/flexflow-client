@@ -6,7 +6,6 @@ export default function Cancel() {
         <main className="min-h-screen bg-[#0f172a] flex items-center justify-center p-6">
             <section className="bg-[#1e293b] border border-slate-700 p-8 md:p-12 rounded-2xl shadow-2xl max-w-lg w-full text-center">
                 
-                {/* Cancel আইকন */}
                 <div className="mx-auto bg-red-500/10 w-20 h-20 flex items-center justify-center rounded-full mb-6">
                     <XCircle className="text-red-500 w-12 h-12" />
                 </div>

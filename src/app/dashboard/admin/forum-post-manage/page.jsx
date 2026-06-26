@@ -28,7 +28,7 @@ export default function ForumPostManagePage() {
                 method: 'DELETE'
             });
             if (res.ok) {
-                fetchPosts(); // ডিলিট করার পর লিস্ট রিফ্রেশ করা
+                fetchPosts();
             }
         } catch (error) {
             console.error("Error deleting post:", error);

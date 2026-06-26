@@ -10,7 +10,7 @@ import { authClient, useSession } from '@/lib/auth-client';
 const NavbarPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
-    const pathname = usePathname(); // বর্তমান রুটের জন্য
+    const pathname = usePathname();
 
     const { data: session } = useSession();
     const user = session?.user;

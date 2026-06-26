@@ -32,11 +32,9 @@ export default function AddForumPost() {
 
             const imgData = await imgResponse.json();
 
-            // ইমেজ আপলোড সাকসেস চেক
             if (imgData?.success && imgData?.data?.url) {
                 const imageUrl = imgData.data.url;
 
-                // ২. ডাটাবেসে পোস্ট ডাটা পাঠানো
                 const postData = {
                     title: form.title.value,
                     description: form.description.value,
