@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function BookingButton({ classData, userEmail, userName }) {
   const [isBooked, setIsBooked] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [dbUser, setDbUser] = useState(null);
 
   useEffect(() => {
     if (classData?._id && userEmail) {
@@ -17,13 +18,28 @@ export default function BookingButton({ classData, userEmail, userName }) {
     }
   }, [classData, userEmail]);
 
+
+  useEffect(() => {
+    if (userEmail) {
+      fetch(`http://localhost:5000/api/user/${userEmail}`)
+        .then(res => res.json())
+        .then(data => {
+          setDbUser(data);
+        })
+        .catch(err => console.error("User fetch error:", err));
+    }
+  }, [userEmail]);
+
   const handlePayment = async () => {
-    if (isBooked) {
-      toast.danger("You have already booked this class!"); // অথবা toast.error ব্যবহার করুন
+    if (dbUser?.status === 'blocked') {
+      toast.danger("Action restricted by Admin");
       return;
     }
 
-
+    if (isBooked) {
+      toast.error("You have already booked this class!"); 
+      return;
+    }
 
     try {
       const res = await fetch('/api/checkout_sessions', {
@@ -41,10 +57,10 @@ export default function BookingButton({ classData, userEmail, userName }) {
   return (
     <Button
       onClick={handlePayment}
-      disabled={isBooked || loading}
-      className={`w-full font-bold h-12 mb-3 ${isBooked ? "bg-gray-500 cursor-not-allowed" : "bg-green-500 text-black hover:bg-green-400"}`}
+      disabled={isBooked || loading || dbUser?.status === 'blocked'} // বাটন ডিজ্যাবল করে দেওয়া ভালো
+      className={`w-full font-bold h-12 mb-3 ${isBooked || dbUser?.status === 'blocked' ? "bg-gray-500 cursor-not-allowed" : "bg-green-500 text-black hover:bg-green-400"}`}
     >
-      {isBooked ? "Already Booked" : `Book Now — $${classData?.price || "0"}`}
+      {dbUser?.status === 'blocked' ? "Blocked" : (isBooked ? "Already Booked" : `Book Now — $${classData?.price || "0"}`)}
     </Button>
   );
 }

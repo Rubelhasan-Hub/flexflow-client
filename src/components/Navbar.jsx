@@ -14,6 +14,7 @@ const NavbarPage = () => {
 
     const { data: session } = useSession();
     const user = session?.user;
+    
 
     useEffect(() => {
         setMounted(true);

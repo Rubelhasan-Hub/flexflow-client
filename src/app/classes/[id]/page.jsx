@@ -16,6 +16,7 @@ const DetailsPage = async ({ params }) => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     const authHeaders = await authHeader();
 
+
     const res = await fetch(`${baseUrl}/api/all-classes/${id}`, {
         cache: 'no-store',
         method: 'GET',
@@ -24,6 +25,7 @@ const DetailsPage = async ({ params }) => {
             ...authHeaders
         }
     });
+
     const data = await res.json();
 
     const session = await auth.api.getSession({
