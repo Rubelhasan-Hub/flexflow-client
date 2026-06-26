@@ -21,7 +21,7 @@ export default function BookingButton({ classData, userEmail, userName }) {
 
   useEffect(() => {
     if (userEmail) {
-      fetch(`http://localhost:5000/api/user/${userEmail}`)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${userEmail}`)
         .then(res => res.json())
         .then(data => {
           setDbUser(data);
@@ -37,7 +37,7 @@ export default function BookingButton({ classData, userEmail, userName }) {
     }
 
     if (isBooked) {
-      toast.error("You have already booked this class!"); 
+      toast.danger("You have already booked this class!"); 
       return;
     }
 

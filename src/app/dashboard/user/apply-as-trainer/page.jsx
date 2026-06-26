@@ -9,7 +9,7 @@ export default function ApplyTrainer() {
 
     useEffect(() => {
         if (session?.user?.email) {
-            fetch(`http://localhost:5000/api/user/${session.user.email}`)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${session.user.email}`)
                 .then(res => res.json())
                 .then(data => setDbUser(data))
                 .catch(err => console.error("User fetch error:", err));

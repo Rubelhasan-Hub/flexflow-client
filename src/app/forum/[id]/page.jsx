@@ -12,16 +12,15 @@ export default function PostDetails() {
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
-    const [dbUser, setDbUser] = useState(null); // ব্লক স্ট্যাটাস চেক করার জন্য
+    const [dbUser, setDbUser] = useState(null);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
     const fetchData = () => {
         fetch(`${baseUrl}/api/forum-posts/${id}`).then(res => res.json()).then(setPost);
         fetch(`${baseUrl}/api/comments/${id}`).then(res => res.json()).then(setComments);
         
-        // ইউজারের স্ট্যাটাস চেক করার জন্য ফেচ
         if (session?.user?.email) {
-            fetch(`http://localhost:5000/api/user/${session.user.email}`)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${session.user.email}`)
                 .then(res => res.json())
                 .then(data => setDbUser(data))
                 .catch(err => console.error("User fetch error:", err));

@@ -9,19 +9,15 @@ export default function MyForumPosts() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-    // useEffect এর ভেতরে সরাসরি লজিক রাখলে কম্পাইলার এরর দেয় না
     useEffect(() => {
         const fetchMyPosts = async () => {
             if (!session?.user?.email) return;
-            
+
             setLoading(true);
             try {
-                const res = await fetch(`${baseUrl}/api/forum-posts`);
+                const res = await fetch(`${baseUrl}/api/forum-posts/by-author/${session.user.email}`);
                 const data = await res.json();
-                // ফিল্টার করা ডাটা
-                const myPosts = data.filter(p => p.authorEmail === session.user.email);
-                setPosts(myPosts);
+                setPosts(data || []);
             } catch (error) {
                 console.error("Error fetching posts:", error);
             } finally {
@@ -30,7 +26,7 @@ export default function MyForumPosts() {
         };
 
         fetchMyPosts();
-    }, [session?.user?.email, baseUrl]); // শুধুমাত্র এই দুটি চেঞ্জ হলেই ডাটা রি-ফেচ হবে
+    }, [session?.user?.email, baseUrl]);
 
     const handleDelete = async (id) => {
         // const isConfirmed = window.confirm("Are you sure? This action cannot be undone.");
@@ -53,7 +49,7 @@ export default function MyForumPosts() {
     return (
         <div className="p-10 text-white max-w-6xl mx-auto">
             <h1 className="text-3xl font-bold mb-8">My Forum Posts</h1>
-            
+
             {posts.length === 0 ? (
                 <div className="text-center py-10 border border-dashed border-neutral-800 rounded-2xl">
                     <p className="text-gray-500">You have not created any posts yet.</p>
@@ -69,8 +65,8 @@ export default function MyForumPosts() {
                             )}
                             <h2 className="font-bold text-xl mb-2 grow">{post.title}</h2>
                             <p className="text-gray-400 text-sm mb-4 line-clamp-3">{post.description}</p>
-                            
-                            <button 
+
+                            <button
                                 onClick={() => handleDelete(post._id)}
                                 className="flex items-center justify-center gap-2 w-full py-2 bg-red-950/20 text-red-500 border border-red-900/50 rounded-lg hover:bg-red-600 hover:text-white transition-all"
                             >

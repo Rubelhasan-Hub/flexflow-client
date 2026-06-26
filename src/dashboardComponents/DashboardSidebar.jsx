@@ -3,9 +3,9 @@
 // import { getUserSession } from "@/lib/core/session";
 "use client";
 import { useSession } from "@/lib/auth-client";
-import { LayoutSideContentLeft, PersonPlus, Briefcase, CirclePlusFill, Gear, House, Bookmark, StarFill, CreditCard, File, MapPin, ChevronsExpandToLines } from "@gravity-ui/icons";
+import { LayoutSideContentLeft, PersonPlus, Briefcase, CirclePlusFill, Gear, House, Bookmark, StarFill, CreditCard, File, MapPin, ChevronsExpandToLines, ChartTreemap } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
-import { Building, Users } from "lucide-react";
+import { Building } from "lucide-react";
 import Link from "next/link";
 
 export function DashboardSidebar() {
@@ -38,8 +38,8 @@ export function DashboardSidebar() {
         { icon: Building, href: "/dashboard/admin/applied-trainers", label: "Applied Trainers" },
         { icon: Briefcase, href: "/dashboard/admin/manage-trainers", label: "Manage Trainers" },
         { icon: CreditCard, href: "/dashboard/admin/manage-classes", label: "Manage Classes" },
-        { icon: Gear, href: "/dashboard/admin/add-forum-post", label: "Add Forum Post" },
-        { icon: Gear, href: "/dashboard/admin/transactions", label: "Transactions " },
+        { icon: PersonPlus, href: "/dashboard/admin/add-forum-post", label: "Add Forum Post" },
+        { icon: ChartTreemap, href: "/dashboard/admin/transactions", label: "Transactions " },
         { icon: Gear, href: "/dashboard/admin/forum-post-manage", label: "Forum Post Manage " },
     ];
 

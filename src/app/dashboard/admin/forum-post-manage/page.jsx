@@ -14,7 +14,7 @@ export default function ForumPostManagePage() {
             setLoading(true);
             const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/forum-posts`);
             const data = await res.json();
-            setPosts(data);
+            setPosts(data.posts || []); // ✅ data.posts নিন
         } catch (error) {
             console.error("Error fetching posts:", error);
         } finally {
