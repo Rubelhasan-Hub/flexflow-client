@@ -3,7 +3,7 @@
 Welcome to Flexflow , a comprehensive platform designed for fitness enthusiasts, trainers, and administrators to streamline gym management and community engagement.
 
 ## 🚀 Live Demo
-https://flexflow-client.vercel.app
+https://flexflow-gym.vercel.app
 
 
 ## 📋 Purpose
