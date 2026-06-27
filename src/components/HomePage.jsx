@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Button } from '@heroui/react';
 import { ArrowRight } from '@gravity-ui/icons';
 
 export default function HomePage({ classes: rawClasses }) {
@@ -67,7 +66,7 @@ export default function HomePage({ classes: rawClasses }) {
                         <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
                             {/* Requirement: Explore Classes CTA Button */}
                             <Link href="/classes">
-                                <button className="bg-green-500 hover:bg-green-400 text-black font-bold px-8 py-4 rounded-xl shadow-lg shadow-green-500/20 transition-all transform hover:-translate-y-0.5">
+                                <button className="cursor-pointer bg-green-500 hover:bg-green-400 text-black font-bold px-8 py-4 rounded-xl shadow-lg shadow-green-500/20 transition-all transform hover:-translate-y-0.5">
                                     Explore Classes
                                 </button>
                             </Link>

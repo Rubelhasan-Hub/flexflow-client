@@ -40,7 +40,7 @@ const styles = {
     title: {
         fontSize: '80px',
         fontWeight: '800',
-        color: '#ccff00',
+        color: 'green',
         margin: '0'
     },
     heading: {
@@ -53,7 +53,7 @@ const styles = {
     },
     button: {
         padding: '12px 24px',
-        backgroundColor: '#ccff00',
+        backgroundColor: 'green',
         color: '#000000',
         border: 'none',
         borderRadius: '8px',

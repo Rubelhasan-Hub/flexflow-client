@@ -61,7 +61,7 @@ const NavbarPage = () => {
                                 height={90}
                                 className="object-contain"
                             />
-                            <p className="font-bold text-2xl tracking-wider text-white">
+                            <p className="font-bold text-xl lg:text-2xl tracking-wider text-white">
                                 Flex<span className="text-green-500">Flow</span>
                             </p>
                         </div>
